@@ -1,0 +1,27 @@
+.# Gradle
+.gradle/
+build/
+
+# IntelliJ / JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Kotlin
+*.class
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local config
+local.properties
+
+# Simulation outputs
+result.txt
+
