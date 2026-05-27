@@ -19,7 +19,8 @@ object Config {
         "AMQTT" to "jp.ac.tmu.sakailab.mqtt.routing.AMqttBroker",
         "Vuvuzela" to "jp.ac.tmu.sakailab.mqtt.routing.privmsg.VuvuzelaBroker",
         "DPMQTT" to "jp.ac.tmu.sakailab.mqtt.routing.dpmqtt.DPMqttBroker",
-        "OptDPMQTT" to "jp.ac.tmu.sakailab.mqtt.routing.dpmqtt.OptDPMqttBroker"
+        "OptDPMQTT" to "jp.ac.tmu.sakailab.mqtt.routing.dpmqtt.OptDPMqttBroker",
+        "JumpMqtt" to "jp.ac.tmu.sakailab.mqtt.routing.jumpmqtt.JumpMqttBroker"
     )
 
     /**
@@ -31,7 +32,8 @@ object Config {
         "AMQTT" to "jp.ac.tmu.sakailab.mqtt.routing.AMqttDevice",
         "Vuvuzela" to "jp.ac.tmu.sakailab.mqtt.routing.privmsg.VuvuzelaDevice",
         "DPMQTT" to "jp.ac.tmu.sakailab.mqtt.routing.dpmqtt.DPMqttDevice",
-        "OptDPMQTT" to "jp.ac.tmu.sakailab.mqtt.routing.dpmqtt.DPMqttDevice"
+        "OptDPMQTT" to "jp.ac.tmu.sakailab.mqtt.routing.dpmqtt.DPMqttDevice",
+        "JumpMqtt" to "jp.ac.tmu.sakailab.mqtt.routing.jumpmqtt.JumpMqttDevice"
     )
 
     // The system and protocol parameters
@@ -105,7 +107,7 @@ object Config {
         /**
          * The protocol names.
          */
-        if (protName !in listOf("PlainMQTT", "Tor", "AMQTT", "DPMQTT", "OptDPMQTT", "Vuvuzela")) {
+        if (protName !in listOf("PlainMQTT", "Tor", "AMQTT", "DPMQTT", "OptDPMQTT", "Vuvuzela", "JumpMqtt")) {
             System.err.println("Invalid protocol name, ${protName}.")
             System.err.flush()
             return false
