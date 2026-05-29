@@ -22,3 +22,16 @@ application {
     // C'est la ligne magique qui dit où se trouve ton point de départ !
     mainClass.set("jp.ac.tmu.sakailab.MainDPSimKt")
 }
+
+tasks.withType<Jar> {
+    manifest {
+        // Remplace par le chemin exact de ton Main si ce n'est pas celui-ci
+        attributes["Main-Class"] = "jp.ac.tmu.sakailab.MainDPSimKt"
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(sourceSets.main.get().output)
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
+}

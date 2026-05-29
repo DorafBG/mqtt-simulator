@@ -24,4 +24,5 @@ local.properties
 
 # Simulation outputs
 result.txt
+./results
 

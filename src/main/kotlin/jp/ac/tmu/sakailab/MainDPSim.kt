@@ -155,14 +155,21 @@ fun main(args: Array<String>) {
 
     // 5. Output results
     val results = config.correctedResults
+
+    // Compute average cryptographic operations per broker
+    val avgCryptoOpsPerBroker = if (config.numBrokers > 0) {
+        (config.numEnc + config.numDec).toDouble() / config.numBrokers
+    } else 0.0
+
     println(results.toString())
 
     try {
         val fileName = "result.txt"
-        val content = "${getParamsStr(Config.scenario)}${results.joinToString(" ", prefix = " ")}\n"
+        val content = "${getParamsStr(Config.scenario)}${results.joinToString(" ", prefix = " ")} $avgCryptoOpsPerBroker\n"
 
         // file output
         File(fileName).appendText(content)
+
 
     } catch (e: IOException) {
         println("Critical I/O Hazard: ${e.message}")
