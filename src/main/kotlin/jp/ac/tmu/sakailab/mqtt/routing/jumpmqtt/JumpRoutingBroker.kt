@@ -21,7 +21,7 @@ open class JumpRoutingBroker(
     id: Int,
     circuitLength: Int
 ) : AMqttBroker(id, circuitLength) {
-    private val pf: Double = 0.5 // base:  0.85
+    private val pf: Double = 0.85 // base:  0.85
     private val maxHops: Int = 10 // base: 10
 
     /**

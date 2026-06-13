@@ -20,15 +20,13 @@ class JumpRoutingDevice(id: Int) : AMqttDevice(id) {
      * @param time  The timestamp that a published message is generated.
      */
     override fun genPubMsg(topicId: Int, time: Long) {
-        // Retrieve set of destination device IDs for the given topic
         val destIdSet = PublicBulletinBoard.getDestDeviceIds(topicId)
 
         for (destId in destIdSet) {
-            // Create a new Jump-Routing-specific publication message
             val msg = UnicastPubMsg(this.id, topicId, destId)
             MsgTracer.onCreated(msg, this.id, time)
 
-            // Schedule the encryption event
+            // schedule the encryption event
             val params = arrayOf<Any?>(msg)
             val e = Event(time, this::fireEncPubMsg, params)
             Scheduler.addEvent(e)

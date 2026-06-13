@@ -1,7 +1,5 @@
 plugins {
-    // Indique à IntelliJ que c'est un projet Kotlin
     kotlin("jvm") version "1.9.23"
-    // Ajoute la capacité de "Run" (lancer) le projet
     application
 }
 

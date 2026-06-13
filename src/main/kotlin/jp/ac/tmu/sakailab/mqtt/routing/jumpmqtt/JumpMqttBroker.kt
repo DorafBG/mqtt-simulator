@@ -36,7 +36,7 @@ open class JumpMqttBroker(
     id: Int,
     circuitLength: Int
 ) : AMqttBroker(id, circuitLength) {
-    private val pf: Double = 0.5   // base: 0.85
+    private val pf: Double = 0.85   // base: 0.85
     private val maxHops: Int = 10
 
     // Phase I — Source broker: fan-out to one JumpEncapMsg per destination broker
@@ -78,13 +78,10 @@ open class JumpMqttBroker(
         for (destDeviceId in destDeviceIds) {
             val destBrokerId = PublicBulletinBoard.getDestBrokerId(destDeviceId)
 
-            // Skip if we already created a circuit for this destination broker.
-            if (destBrokerId in processedDestBrokers) continue
+            if (destBrokerId in processedDestBrokers) continue // skip if we already created a circuit for this dest broker
             processedDestBrokers.add(destBrokerId)
 
-            // Use the original PubMsg for the first destination broker, and a clone for
-            // subsequent ones. The plain PubMsg (with topicId) lets the destination broker
-            // deliver to ALL locally subscribed devices, not just one.
+            // Use the original PubMsg for the first destination broker, and a clone for others
             val innerMsg: PubMsg = if (needCopy) {
                 val cloned = pubMsg.cloneMsg() as PubMsg
                 MsgTracer.inheritRecord(pubMsg, cloned.getMsgId())

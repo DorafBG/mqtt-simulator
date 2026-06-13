@@ -33,11 +33,9 @@ class JumpMqttDevice(id: Int) : AMqttDevice(id) {
      * @param time    The timestamp at which the published message is generated.
      */
     override fun genPubMsg(topicId: Int, time: Long) {
-        // Single message creation — no loop over subscribers.
         val msg = PubMsg(this.id, topicId)
         MsgTracer.onCreated(msg, this.id, time)
 
-        // Schedule exactly one encryption event toward the associated broker.
         val params = arrayOf<Any?>(msg)
         val e = Event(time, this::fireEncPubMsg, params)
         Scheduler.addEvent(e)
