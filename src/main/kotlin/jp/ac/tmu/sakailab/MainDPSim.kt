@@ -8,6 +8,7 @@ import jp.ac.tmu.sakailab.mqtt.routing.dpmqtt.DPMqttBroker
 import jp.ac.tmu.sakailab.mqtt.routing.dpmqtt.NoiseMsgGenerator.generateFakePubMsgs
 import jp.ac.tmu.sakailab.mqtt.routing.dpmqtt.NoiseMsgGenerator.generateNoiseMsgs
 import jp.ac.tmu.sakailab.mqtt.routing.privmsg.VuvuzelaBroker
+import jp.ac.tmu.sakailab.mqtt.MsgTracer
 import jp.ac.tmu.sakailab.mqtt.routing.privmsg.VuvuzelaNoiseMsgGenerator.generateFakeVuvuzelaPubMsgs
 import jp.ac.tmu.sakailab.mqtt.routing.privmsg.VuvuzelaNoiseMsgGenerator.generateVuvuzelaNoiseMsgs
 import jp.ac.tmu.sakailab.mqtt.sim.DPSimulator
@@ -165,7 +166,7 @@ fun main(args: Array<String>) {
 
     try {
         val fileName = "result.txt"
-        val content = "${getParamsStr(Config.scenario)}${results.joinToString(" ", prefix = " ")} $avgCryptoOpsPerBroker\n"
+        val content = "${getParamsStr(Config.scenario)}${results.joinToString(" ", prefix = " ")} $avgCryptoOpsPerBroker ${MsgTracer.getAverageHops()}\n"
 
         // file output
         File(fileName).appendText(content)

@@ -39,7 +39,7 @@ open class JumpMqttBroker(
     private val pf: Double = 0.85   // base: 0.85
     private val maxHops: Int = 10
 
-    // Phase I — Source broker: fan-out to one JumpEncapMsg per destination broker
+    // Phase I - Source broker: fan-out to one JumpEncapMsg per destination broker
 
     /**
      * Called when the source broker receives the single encrypted [PubMsg] from the

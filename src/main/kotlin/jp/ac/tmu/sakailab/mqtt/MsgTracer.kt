@@ -127,6 +127,18 @@ object MsgTracer {
     }
 
     /**
+     * This function computes the average number of topological hops for delivered messages.
+     * The path size indicates the number of nodes visited. Number of hops = path size - 1.
+     */
+    fun getAverageHops(): Double {
+        val deliveredRecords = recordMap.values.filter { it.isDelivered }
+        if (deliveredRecords.isEmpty()) return 0.0
+
+        val totalHops = deliveredRecords.sumOf { it.path.size - 1 }
+        return totalHops.toDouble() / deliveredRecords.size
+    }
+
+    /**
      * This function computes the delivery rate of a set of MQTT sessions.
      */
     fun getDeliveryRate(): Double {
